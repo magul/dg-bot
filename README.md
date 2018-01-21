@@ -1,3 +1,3 @@
-# DGTutCroGitBot
+# dg-bot
 
-Django Girl's Tutorial Crowdin->Guthub Bot
+Django Girl's  Bot

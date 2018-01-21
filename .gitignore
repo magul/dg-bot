@@ -1,1 +1,4 @@
 tutorial/
+__pycache__/
+
+secrets.py
