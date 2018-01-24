@@ -10,6 +10,25 @@ from git import Repo
 import secrets
 
 
+language_transition = {
+    'cs': 'cs',
+    'de': 'de',
+    # 'en': 'en',
+    'es-ES': 'es',
+    'fr': 'fr',
+    'hu': 'hu',
+    'it': 'it',
+    'ko': 'ko',
+    'pl': 'pl',
+    'pt-BR': 'pt',
+    'ru': 'ru',
+    'sk': 'sk',
+    'tr': 'tr',
+    'uk': 'uk',
+    'zh-CN': 'zh',
+}
+
+
 class Crowdin(object):
 
     _supported_languages = None
@@ -69,22 +88,9 @@ class Crowdin(object):
 if __name__ == '__main__':
     c = Crowdin(secrets.PROJECT_IDENTIFIER, secrets.PROJECT_KEY)
 
-    two_letter_code_occurs = {}
-    for code, language in c.translation_status().items():
-        two_letter_code = c.supported_languages()[code]['iso_639_1']
-        two_letter_code_occurs[two_letter_code] = two_letter_code_occurs.get(
-            two_letter_code, 0
-        ) + 1
-    language_transition = {
-        code: c.supported_languages()[code]['iso_639_1']
-        if two_letter_code_occurs[c.supported_languages()[code]['iso_639_1']] == 1
-        else c.supported_languages()[code]['locale']
-        for code in c.translation_status()
-    }
-
     repo = Repo(os.path.join(os.path.dirname(__file__), 'tutorial'))
     c.export()
-    for code in c.translation_status():
+    for code in language_transition:
         repo.heads.master.checkout()
         repo.create_head('crowdin-translation-{}'.format(
             language_transition[code]
