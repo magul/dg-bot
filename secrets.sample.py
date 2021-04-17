@@ -1,4 +1,2 @@
-# -*- coding: utf-8 -*-
-
-PROJECT_IDENTIFIER = ''
-PROJECT_KEY = ''
+PROJECT_ID = ''
+ACCESS_TOKEN = ''
